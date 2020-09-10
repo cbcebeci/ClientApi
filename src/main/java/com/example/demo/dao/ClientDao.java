@@ -9,6 +9,7 @@ import java.util.UUID;
 public interface ClientDao {
 
     int insertClient(UUID id, Client client);
+
     default int insertClient(Client client){
         UUID id = UUID.randomUUID();
         return insertClient(id, client);
@@ -17,6 +18,8 @@ public interface ClientDao {
     List<Client> selectAllClient();
 
     Optional<Client> selectClientById(UUID id);
+
+    List<Client> selectClientBySurname(String surname);
 
     int deleteClientById(UUID id);
 

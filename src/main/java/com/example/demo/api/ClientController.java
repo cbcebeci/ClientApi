@@ -37,6 +37,11 @@ public class ClientController {
                 .orElse(null);
     }
 
+    @GetMapping(path = "surname={surname}")
+    public List<Client> getClientBySurname(@PathVariable("surname") String surname){
+        return clientService.getClientBySurname(surname);
+    }
+
     @DeleteMapping(path = "{id}")
     public void deleteClientById(@PathVariable("id") UUID id){
         clientService.deleteClient(id);
@@ -46,4 +51,6 @@ public class ClientController {
     public void updateClient(@PathVariable("id")UUID id,@Valid @NonNull @RequestBody Client clientToUpdate){
         clientService.updateClient(id, clientToUpdate);
     }
+
+
 }

@@ -12,10 +12,16 @@ public class Client {
     @NotBlank
     private final String name;
 
+    private final String surname;
+
+
+
     public Client(@JsonProperty("id") UUID id,
-                  @JsonProperty("name") String name) {
+                  @JsonProperty("name") String name,
+                  @JsonProperty("surname") String surname) {
         this.id = id;
         this.name = name;
+        this.surname = surname;
     }
 
     public UUID getId() {
@@ -25,4 +31,7 @@ public class Client {
     public String getName() {
         return name;
     }
+
+    public String getSurname() { return surname; }
+
 }

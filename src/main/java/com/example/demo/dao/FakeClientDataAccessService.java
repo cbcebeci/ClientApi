@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository("fakeDao")
 public class FakeClientDataAccessService implements ClientDao{
@@ -14,7 +15,7 @@ public class FakeClientDataAccessService implements ClientDao{
 
     @Override
     public int insertClient(UUID id, Client client) {
-        DB.add(new Client(id, client.getName()));
+        DB.add(new Client(id, client.getName(), client.getSurname()));
         return 1;
     }
 
@@ -28,6 +29,13 @@ public class FakeClientDataAccessService implements ClientDao{
         return DB.stream()
                 .filter(client -> client.getId().equals(id))
                 .findFirst();
+    }
+
+    @Override
+    public List<Client> selectClientBySurname(String surname) {
+        return DB.stream()
+                .filter(client -> client.getSurname().equals(surname))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -46,10 +54,9 @@ public class FakeClientDataAccessService implements ClientDao{
                 .map(client -> {
                     int indexOfClientToUpdate = DB.indexOf(client);
                     if (indexOfClientToUpdate >= 0){
-                        DB.set(indexOfClientToUpdate, new Client(id, update.getName() ));
+                        DB.set(indexOfClientToUpdate, new Client(id, update.getName(), update.getSurname()));
                         return 1;
-                    }
-                    return 0;
+                    } return 0;
                 })
                 .orElse(0);
     }

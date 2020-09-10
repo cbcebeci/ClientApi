@@ -32,6 +32,8 @@ public class ClientService {
         return clientDao.selectClientById(id);
     }
 
+    public List<Client> getClientBySurname(String surname){ return clientDao.selectClientBySurname(surname);}
+
     public int deleteClient(UUID id){
         return clientDao.deleteClientById(id);
     }
@@ -39,4 +41,6 @@ public class ClientService {
     public int updateClient(UUID id, Client newClient){
         return clientDao.updateClientById(id, newClient);
     }
+
+
 }
